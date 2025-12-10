@@ -1,7 +1,5 @@
 # NHAPMON-CNPM-NH-M-5-QL-SHOP-QU-N-O-N-
-A. MÔ TẢ HỆ THỐNG
-
-Hệ thống quản lý shop quần áo nữ giúp các cửa hàng thời trang nữ tối ưu hóa quy trình bán hàng và quản lý tồn kho đa thuộc tính. Mục tiêu là tăng tốc độ xử lý đơn hàng và nhận diện mẫu mã bán chạy để ra quyết định kinh doanh kịp thời, tăng lợi nhuận.
+A. MÔ TẢ HỆ THỐNG: Hệ thống quản lý shop quần áo nữ giúp các cửa hàng thời trang nữ tối ưu hóa quy trình bán hàng và quản lý tồn kho đa thuộc tính. Mục tiêu là tăng tốc độ xử lý đơn hàng và nhận diện mẫu mã bán chạy để ra quyết định kinh doanh kịp thời, tăng lợi nhuận.
 
 Hệ thống được thiết kế cho các đối tượng sử dụng chính:
 - Nhân viên bán hàng
@@ -10,7 +8,6 @@ Hệ thống được thiết kế cho các đối tượng sử dụng chính:
 - Khách hàng (thông qua trải nghiệm mua – đổi trả – tích điểm)
 
 B. MỤC TIÊU HỆ THỐNG
-
 1, Hướng tới cửa hàng
 - Tự động hóa các công việc: bán hàng, nhập kho, tồn kho, báo cáo.
 - Giảm sai sót khi tính tiền, quản lý voucher, trừ kho.
@@ -25,7 +22,6 @@ Hệ thống được thiết kế để tối ưu trải nghiệm khách mua s�
 - Tương tác cá nhân hóa thông qua thông tin khách hàng (hồ sơ, thói quen mua sắm).
 
 C. LỢI ÍCH KHI XÂY DỰNG HỆ THỐNG
-
 - Quy trình mua bán hàng nhanh – chính xác
 - Kiểm soát tồn kho chặt chẽ
 - Báo cáo rõ ràng giúp ra quyết định tốt hơn
@@ -33,8 +29,12 @@ C. LỢI ÍCH KHI XÂY DỰNG HỆ THỐNG
 - Chính sách tích điểm rõ ràng
 - Đổi trả dễ dàng – minh bạch
 - Trải nghiệm chuyên nghiệp hơn
-
-D. CHỨC NĂNG VÀ PHI CHỨC NĂNG
-
+  
+->  TÓM LẠI Hệ thống quản lý shop quần áo nữ là giải pháp toàn diện, lấy nhân viên làm trung tâm vận hành và khách hàng làm trung tâm trải nghiệm.
+Các chức năng được thiết kế xoay quanh việc:
+- Tăng tốc độ bán hàng
+- Tối ưu kho
+- Tăng sự hài lòng của khách
+- Giảm công sức quản lý
 
 
