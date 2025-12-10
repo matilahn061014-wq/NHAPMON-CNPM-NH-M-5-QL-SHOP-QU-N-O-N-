@@ -1,5 +1,5 @@
 # NHAPMON-CNPM-NH-M-5-QL-SHOP-QU-N-O-N-
-Quan ly doi/tra hang
+US3.Quan ly doi/tra hang
 fORDERS_DB = [
     {
         "order_id": "DH2025001",
@@ -34,5 +34,29 @@ def search_order(order_id):
         if order["order_id"] == order_id:
             return order
     return None
+US4.Them/sua/xoa san pham
+INVENTORY_DB = {
+    "SP001": 50,  # Áo thun
+    "SP002": 15,  # Quần Jeans
+    "SP003": 30   # Giày chạy bộ
+}
+
+def replenish_inventory(return_items):
+    """
+    Cộng tồn kho cho các sản phẩm được trả lại.
+    Input: return_items (list of dicts) - [{"sku": "SPxxx", "quantity": N}]
+    Output: True nếu thành công
+    """
+    print("\n--- BƯỚC 2: CẬP NHẬT TỒN KHO ---")
+    for item in return_items:
+        sku = item["sku"]
+        quantity = item["quantity"]
+        
+        current_stock = INVENTORY_DB.get(sku, 0) # Lấy tồn kho hiện tại, nếu không có mặc định là 0
+        INVENTORY_DB[sku] = current_stock + quantity
+        
+        print(f"Hoàn nhập: {sku} | Số lượng: {quantity}. Tồn mới: {INVENTORY_DB[sku]}")
+
+    return True
 
 
