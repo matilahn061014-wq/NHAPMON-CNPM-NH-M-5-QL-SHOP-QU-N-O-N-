@@ -1,0 +1,136 @@
+import sqlite3
+from typing import List, Optional, Dict, Any
+
+# --- Cấu trúc Dữ liệu Khách hàng ---
+class Customer:
+    def __init__(self, customer_id: int, name: str, phone_number: str, address: str):
+        self.customer_id = customer_id
+        self.name = name
+        self.phone_number = phone_number
+        self.address = address
+
+    def to_dict(self):
+        return {
+            "id": self.customer_id,
+            "name": self.name,
+            "phone_number": self.phone_number,
+            "address": self.address,
+        }
+
+# --- Service/Logic nghiệp vụ ---
+class CustomerService:
+    def __init__(self, db_name="crm_db.sqlite"):
+        # Kết nối/Tạo cơ sở dữ liệu SQLite
+        self.conn = sqlite3.connect(db_name)
+        self.cursor = self.conn.cursor()
+        self._setup_database()
+
+    def _setup_database(self):
+        """Tạo bảng Customer nếu chưa tồn tại"""
+        # Sử dụng UNIQUE cho PhoneNumber để đảm bảo tính DUY NHẤT
+        self.cursor.execute("""
+            CREATE TABLE IF NOT EXISTS customers (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                phone_number TEXT UNIQUE NOT NULL, 
+                address TEXT
+            )
+        """)
+        self.conn.commit()
+
+    def _map_row_to_customer(self, row: tuple) -> Customer:
+        """Ánh xạ hàng dữ liệu (tuple) sang đối tượng Customer"""
+        return Customer(row[0], row[1], row[2], row[3])
+
+    ### A. Chức năng: Tạo Khách hàng Mới
+    def create_customer(self, name: str, phone_number: str, address: str) -> Dict[str, Any]:
+        """
+        Tạo khách hàng mới. Yêu cầu: SĐT là bắt buộc và duy nhất.
+        """
+        if not phone_number or not name:
+            return {"success": False, "message": "Số điện thoại và Tên khách hàng là bắt buộc."}
+
+        try:
+            # SĐT duy nhất được đảm bảo bởi ràng buộc UNIQUE trong DB
+            self.cursor.execute(
+                "INSERT INTO customers (name, phone_number, address) VALUES (?, ?, ?)",
+                (name, phone_number, address)
+            )
+            self.conn.commit()
+            
+            # Lấy ID của bản ghi vừa tạo
+            customer_id = self.cursor.lastrowid
+            
+            # Lấy thông tin khách hàng vừa tạo để trả về
+            self.cursor.execute("SELECT * FROM customers WHERE id = ?", (customer_id,))
+            new_customer_row = self.cursor.fetchone()
+            new_customer = self._map_row_to_customer(new_customer_row)
+
+            return {"success": True, "message": "Tạo khách hàng thành công.", "customer": new_customer.to_dict()}
+            
+        except sqlite3.IntegrityError:
+            # Bị lỗi IntegrityError khi phone_number đã tồn tại
+            return {"success": False, "message": "Lỗi: Số điện thoại đã tồn tại. Không thể tạo khách hàng mới."}
+        except Exception as e:
+            return {"success": False, "message": f"Lỗi không xác định: {e}"}
+
+    ### B. Chức năng: Tìm kiếm Khách hàng
+    def search_customers(self, query: str) -> List[Dict[str, Any]]:
+        """
+        Tìm kiếm khách hàng theo SĐT (chính xác) hoặc Tên (chứa).
+        """
+        if not query:
+            return []
+
+        # Tạo query tìm kiếm theo SĐT hoặc Tên
+        # Lưu ý: Tìm kiếm theo SĐT nên ưu tiên chính xác, Tên có thể là LIKE
+        sql_query = """
+            SELECT * FROM customers 
+            WHERE phone_number = ? OR name LIKE ?
+            ORDER BY name
+        """
+        
+        search_term_like = f"%{query}%"
+        self.cursor.execute(sql_query, (query, search_term_like))
+        
+        rows = self.cursor.fetchall()
+        
+        # Chuyển kết quả sang danh sách các dictionary
+        results = [self._map_row_to_customer(row).to_dict() for row in rows]
+        return results
+
+    ### C. Chức năng: Cập nhật Khách hàng
+    def update_customer(self, customer_id: int, name: Optional[str] = None, address: Optional[str] = None) -> Dict[str, Any]:
+        """
+        Chỉnh sửa thông tin hồ sơ (Tên, Địa chỉ) của khách hàng đã có.
+        """
+        # 1. Kiểm tra khách hàng tồn tại
+        self.cursor.execute("SELECT * FROM customers WHERE id = ?", (customer_id,))
+        customer_row = self.cursor.fetchone()
+        
+        if not customer_row:
+            return {"success": False, "message": "Không tìm thấy khách hàng để cập nhật."}
+        
+        customer = self._map_row_to_customer(customer_row)
+        
+        # 2. Cập nhật các trường được phép thay đổi
+        if name is not None:
+            customer.name = name
+        if address is not None:
+            customer.address = address
+
+        # 3. Thực hiện cập nhật trong DB
+        try:
+            self.cursor.execute(
+                "UPDATE customers SET name = ?, address = ? WHERE id = ?",
+                (customer.name, customer.address, customer.customer_id)
+            )
+            self.conn.commit()
+            
+            return {"success": True, "message": "Cập nhật hồ sơ thành công.", "customer": customer.to_dict()}
+        except Exception as e:
+            return {"success": False, "message": f"Lỗi khi cập nhật: {e}"}
+
+# Khởi tạo Service
+crm_service = CustomerService()
+print("--- Thiết lập Cơ sở dữ liệu hoàn tất ---")
