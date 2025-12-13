@@ -10,6 +10,7 @@ A. MÔ TẢ HỆ THỐNG: ​Hệ thống quản lý shop quần áo nữ giúp 
 ​Hệ thống được thiết kế cho các đối tượng sử dụng chính:
 - ​Nhân viên bán hàng
 - ​Khách hàng: Thông qua trải nghiệm mua – đổi trả – tích điểm.
+
 ​B. MỤC TIÊU HỆ THỐNG
 ​1. Hướng tới cửa hàng:
 - ​Tự động hóa các công việc: bán hàng, nhập kho, tồn kho, báo cáo.
@@ -17,6 +18,7 @@ A. MÔ TẢ HỆ THỐNG: ​Hệ thống quản lý shop quần áo nữ giúp 
 ​2. Hướng tới khách hàng:
 - ​Hệ thống được thiết kế để tối ưu trải nghiệm khách mua sắm.
 - ​Tương tác cá nhân hóa thông qua thông tin khách hàng (hồ sơ, thói quen mua sắm).
+
 ​C. LỢI ÍCH KHI XÂY DỰNG HỆ THỐNG
 - ​Quy trình mua bán hàng nhanh – chính xác.
 - ​Kiểm soát tồn kho chặt chẽ.
@@ -43,3 +45,4 @@ Mẫu mã nào bán chạy nhất (để nhập thêm).
 Doanh thu theo ngày/nhân viên.
 Cảnh báo hàng sắp hết kho.
 Chăm sóc khách hàng: Dựa trên thói quen mua sắm (size thường mua, kiểu dáng yêu thích) để gửi tin nhắn ưu đãi cá nhân hóa.
+
