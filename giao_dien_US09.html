@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>US09 - Tạo Phiếu Nhập Hàng</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>TẠO PHIẾU NHẬP HÀNG</h2>
+
+<div class="form-box">
+    <label>Ngày nhập:</label>
+    <input type="date" id="ngayNhap">
+
+    <label>Nhà cung cấp:</label>
+    <input type="text" id="nhaCungCap" placeholder="Nhập tên nhà cung cấp">
+
+    <label>Ghi chú:</label>
+    <textarea placeholder="Ghi chú (không bắt buộc)"></textarea>
+</div>
+
+<h3>Chi tiết sản phẩm</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Sản phẩm</th>
+            <th>Màu</th>
+            <th>Size</th>
+            <th>Số lượng</th>
+            <th>Giá nhập</th>
+            <th>Thành tiền</th>
+            <th>Xóa</th>
+        </tr>
+    </thead>
+    <tbody id="productTable"></tbody>
+</table>
+
+<button onclick="addRow()">+ Thêm sản phẩm</button>
+
+<h3>Tổng tiền: <span id="total">0</span> VNĐ</h3>
+
+<button class="save" onclick="savePhieuNhap()">Lưu phiếu nhập</button>
+
+<script src="script.js"></script>
+</body>
+</html>
