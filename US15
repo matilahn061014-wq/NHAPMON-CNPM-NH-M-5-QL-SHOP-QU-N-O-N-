@@ -1,0 +1,41 @@
+/**
+ * US15: Báo cáo và Thống kê Doanh thu
+ */
+class ReportService {
+    constructor(orders) {
+        this.orders = orders; // Danh sách đơn hàng từ US02
+    }
+
+    // Công việc 1: Tổng hợp doanh thu và số đơn hàng theo nhân viên
+    getRevenueByStaff() {
+        return this.orders.reduce((report, order) => {
+            if (!report[order.staffId]) {
+                report[order.staffId] = { totalRevenue: 0, orderCount: 0 };
+            }
+            report[order.staffId].totalRevenue += order.finalTotal;
+            report[order.staffId].orderCount += 1;
+            return report;
+        }, {});
+    }
+
+    // Công việc 2: Lọc báo cáo theo khoảng thời gian (ngày, tháng)
+    filterOrdersByDate(startDate, endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        
+        return this.orders.filter(order => {
+            const orderDate = new Date(order.timestamp);
+            return orderDate >= start && orderDate <= end;
+        });
+    }
+
+    // Công việc 3: Hiển thị chi tiết các đơn hàng của một nhân viên
+    getStaffDetailReport(staffId) {
+        const staffOrders = this.orders.filter(order => order.staffId === staffId);
+        return {
+            staffId: staffId,
+            orders: staffOrders,
+            summary: staffOrders.reduce((acc, curr) => acc + curr.finalTotal, 0)
+        };
+    }
+}
