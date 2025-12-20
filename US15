@@ -39,3 +39,23 @@ class ReportService {
         };
     }
 }
+// Tạo dữ liệu mẫu để chạy thử
+const mockOrders = [
+    { staffId: "NV01", finalTotal: 100, timestamp: "2023-10-01" },
+    { staffId: "NV01", finalTotal: 200, timestamp: "2023-10-02" },
+    { staffId: "NV02", finalTotal: 150, timestamp: "2023-10-01" }
+];
+
+// Khởi tạo class
+const service = new ReportService(mockOrders);
+
+// Gọi hàm và in kết quả ra Terminal
+console.log("--- Báo cáo theo nhân viên ---");
+console.log(service.getRevenueByStaff());
+
+// 2. Chạy thử hàm tính doanh thu theo nhân viên và in ra màn hình
+const report = service.getRevenueByStaff();
+console.log("KẾT QUẢ BÁO CÁO:");
+console.table(report); // Dùng console.table nhìn cho đẹp
+console.log("--- Kết quả báo cáo ---");
+console.table(service.getRevenueByStaff()); // Dùng console.table để xem dạng bảng cho đẹp
