@@ -1,13 +1,11 @@
 # 📋 DANH SÁCH USER STORIES - QUẢN LÝ SHOP QUẦN ÁO NỮ (NHÓM 5)
 
-## 👥 Thành viên nhóm & Phân công
-* **Nguyễn Hoàng Nhi (Nhóm trưởng):** US1, US6, US8, US16.
-* **Nguyễn Phương Anh:** US4, US9, US10, US11.
-* **Nguyễn Quỳnh Hương:** US4, US7, US12, US18.
-* **Nguyễn Thị Thuý Lê:** US13, US14, US17.
-* **Trần Đình Khánh Uyên:** US2, US3, US5, US15.
-
----
+## 👥 Thành viên nhóm 
+* Nguyễn Hoàng Nhi
+* Nguyễn Phương Anh
+* Nguyễn Quỳnh Hương
+* Nguyễn Thị Thuý Lê
+* Trần Đình Khánh Uyên
 
 ## I. QUẢN LÝ BÁN HÀNG
 ### US01: Tạo đơn hàng & Quét mã
