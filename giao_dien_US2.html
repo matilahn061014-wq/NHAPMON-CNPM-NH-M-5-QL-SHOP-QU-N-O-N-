@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Thanh toán đơn hàng - US02</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background-color: #f4f4f4; }
+        .checkout-container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; text-align: center; border-bottom: 2px solid #27ae60; padding-bottom: 10px; }
+        
+        /* Danh sách sản phẩm - US02 Công việc 1 */
+        .product-list { margin: 20px 0; border-bottom: 1px solid #eee; }
+        .item { display: flex; justify-content: space-between; padding: 10px 0; }
+        
+        /* Hình thức thanh toán - US02 Tiêu chí 3 */
+        .payment-methods { background: #f9f9f9; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        .method-option { margin-bottom: 10px; }
+
+        /* Tổng tiền - US02 Tiêu chí 1 */
+        .total-section { font-size: 1.2em; text-align: right; margin-top: 10px; }
+        .final-price { color: #e74c3c; font-weight: bold; font-size: 1.5em; }
+
+        .btn-pay { background: #27ae60; color: white; border: none; width: 100%; padding: 15px; font-size: 1.2em; border-radius: 5px; cursor: pointer; margin-top: 20px; }
+        .btn-pay:hover { background: #219150; }
+    </style>
+</head>
+<body>
+
+<div class="checkout-container">
+    <h2>Màn hình Thanh toán (US02)</h2>
+
+    <div class="product-list">
+        <strong>Sản phẩm đã chọn:</strong>
+        <div class="item">
+            <span>Áo sơ mi trắng (x2)</span>
+            <span>400.000đ</span>
+        </div>
+        <div class="item">
+            <span>Quần Jean xanh (x1)</span>
+            <span>500.000đ</span>
+        </div>
+    </div>
+
+    <div class="payment-methods">
+        <strong>Chọn hình thức thanh toán:</strong>
+        <div class="method-option">
+            <input type="radio" name="method" id="cash" checked> <label for="cash">Tiền mặt</label>
+        </div>
+        <div class="method-option">
+            <input type="radio" name="method" id="transfer"> <label for="transfer">Chuyển khoản</label>
+        </div>
+        <div class="method-option">
+            <input type="radio" name="method" id="card"> <label for="card">Thẻ (Visa/Mastercard)</label>
+        </div>
+    </div>
+
+    <div class="total-section">
+        <span>Tổng giá trị đơn hàng:</span>
+        <div class="final-price" id="totalPrice">900.000 VNĐ</div>
+    </div>
+
+    <button class="btn-pay" onclick="thanhToan()">Xác nhận Thanh toán</button>
+</div>
+
+<script>
+    function thanhToan() {
+        // Lấy hình thức thanh toán được chọn
+        const method = document.querySelector('input[name="method"]:checked').nextSibling.textContent.trim();
+        
+        // Giả lập xử lý US02 - Công việc 5
+        alert("Xác nhận thanh toán bằng: " + method + 
+              "\n1. Đã tự động trừ số lượng sản phẩm trong kho." + 
+              "\n2. Đã lưu thông tin giao dịch vào báo cáo.");
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+# Giả định: Có một hàm lưu trữ sự kiện giao dịch
+# from app.logging_service import log_transaction
+
+    def finalize_return_transaction(self, return_request_id: str, final_amount: float, action: str):
+        """
+        Lưu trữ lịch sử giao dịch chi tiết và cập nhật trạng thái cuối cùng.
+        """
+        # (1) Cập nhật trạng thái cuối cùng của yêu cầu Đổi/Trả
+        update_return_request_status(return_request_id, "COMPLETED")
+        
+        # (2) Lưu trữ lịch sử giao dịch chi tiết
+        transaction_log = {
+            "return_id": return_request_id,
+            "final_amount": abs(final_amount),
+            "type": "RETURN_REFUND" if action == "REFUND" else ("RETURN_CHARGE" if action == "CHARGE" else "EXCHANGE_ONLY"),
+            "timestamp": datetime.now(),
+            "staff_id": current_user.id
+        }
+        
+        log_transaction(transaction_log)
+
+        return {"success": True, "message": "Giao dịch Đổi/Trả đã hoàn tất và được ghi lại."}

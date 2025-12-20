@@ -1,0 +1,95 @@
+class VoucherService {
+    constructor() {
+        // Giả lập Database Voucher
+        this.vouchers = [
+            { id: 1, code: "XINCHAO", type: "FIXED", value: 20000, minOrder: 50000, expiry: "2025-12-31", limit: 100, used: 5 },
+            { id: 2, code: "GIAM10", type: "PERCENT", value: 10, minOrder: 100000, expiry: "2025-01-01", limit: 50, used: 0 }
+        ];
+    }
+
+    // Công việc 2: Hàm kiểm tra tính hợp lệ
+    checkValidity(code, orderTotal) {
+        const voucher = this.vouchers.find(v => v.code.toUpperCase() === code.toUpperCase());
+        const now = new Date();
+
+        if (!voucher) return { valid: false, msg: "Mã giảm giá không tồn tại." };
+        if (new Date(voucher.expiry) < now) return { valid: false, msg: "Mã đã hết hạn sử dụng." };
+        if (orderTotal < voucher.minOrder) return { valid: false, msg: `Đơn hàng chưa đạt giá trị tối thiểu (${voucher.minOrder.toLocaleString()}đ).` };
+        if (voucher.used >= voucher.limit) return { valid: false, msg: "Mã đã hết lượt sử dụng." };
+
+        return { valid: true, voucher };
+    }
+
+    // Công việc 3: Tính toán số tiền giảm
+    calculateDiscount(voucher, orderTotal) {
+        let discount = 0;
+        if (voucher.type === "FIXED") {
+            discount = voucher.value;
+        } else {
+            discount = (orderTotal * voucher.value) / 100;
+        }
+        // Đảm bảo số tiền giảm không âm và không vượt quá tổng đơn
+        return Math.min(discount, orderTotal);
+    }
+
+    // Công việc 4: Cập nhật lượt sử dụng
+    updateUsage(code) {
+        const voucher = this.vouchers.find(v => v.code === code);
+        if (voucher) {
+            voucher.used += 1;
+            return true;
+        }
+        return false;
+    }
+}
+const service = new VoucherService();
+let currentOrderTotal = 150000; // Tiêu chí 1: Hệ thống tự tính tổng trước (giả lập)
+let activeVoucher = null;
+
+function onApplyVoucher() {
+    const inputCode = document.getElementById("voucherInput").value;
+    const result = service.checkValidity(inputCode, currentOrderTotal);
+
+    const msgElement = document.getElementById("message");
+    const discountElement = document.getElementById("discountDisplay");
+    const finalTotalElement = document.getElementById("finalTotal");
+
+    if (result.valid) {
+        const discount = service.calculateDiscount(result.voucher, currentOrderTotal);
+        activeVoucher = result.voucher.code;
+
+        // Tiêu chí 4: Hiển thị rõ ràng số tiền giảm và tổng cuối cùng
+        msgElement.className = "success";
+        msgElement.innerText = "Áp dụng mã thành công!";
+        discountElement.innerText = `-${discount.toLocaleString()}đ`;
+        finalTotalElement.innerText = `${(currentOrderTotal - discount).toLocaleString()}đ`;
+    } else {
+        msgElement.className = "error";
+        msgElement.innerText = result.msg;
+        activeVoucher = null;
+    }
+}
+
+// Giả lập sự kiện Thanh toán hoàn tất
+function onCompletePayment() {
+    if (activeVoucher) {
+        service.updateUsage(activeVoucher);
+        alert("Thanh toán thành công! Lượt dùng voucher đã được cập nhật.");
+    }
+}
+<div class="checkout-card">
+    <h3>Thanh toán đơn hàng</h3>
+    <p>Tạm tính: <span id="subtotal">150,000đ</span></p>
+
+    <div class="voucher-group">
+        <input type="text" id="voucherInput" placeholder="Nhập mã (VD: XINCHAO)">
+        <button onclick="onApplyVoucher()">Áp dụng</button>
+    </div>
+    <p id="message"></p>
+
+    <hr>
+    <p>Giảm giá: <span id="discountDisplay">0đ</span></p>
+    <p><strong>Tổng cộng: <span id="finalTotal">150,000đ</span></strong></p>
+    
+    <button class="btn-pay" onclick="onCompletePayment()">Xác nhận thanh toán</button>
+</div>
