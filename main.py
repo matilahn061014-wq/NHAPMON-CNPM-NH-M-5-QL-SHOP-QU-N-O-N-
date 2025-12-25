@@ -2,8 +2,8 @@ import os
 
 # 1. Kết nối với các file chức năng trong folder
 try:
-    from kho_hang import chucnang as kho
-    from ban_hang import tao_don_hang as ban
+    from khohang import chucnang as kho
+    from banhang import tao_don_hang as ban
     # Thêm các file khác tương tự ở đây
 except ImportError:
     pass
