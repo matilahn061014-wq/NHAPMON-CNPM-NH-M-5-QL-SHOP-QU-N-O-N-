@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Giao diện US15 - Báo cáo doanh thu</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 30px; background-color: #f8f9fa; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h2 { color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
+        
+        /* Phần lọc ngày - US15 Công việc 2 */
+        .filter-group { background: #eef2f7; padding: 15px; border-radius: 5px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        input[type="date"] { padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        
+        /* Bảng báo cáo - US15 Công việc 1 */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { background-color: #007bff; color: white; padding: 12px; text-align: left; }
+        td { padding: 12px; border-bottom: 1px solid #eee; }
+        tr:hover { background-color: #f1f1f1; }
+
+        .btn { background: #28a745; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
+        .btn-filter { background: #007bff; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Báo cáo Doanh thu & Số lượng đơn hàng (US15)</h2>
+
+    <div class="filter-group">
+        <strong>Lọc theo ngày:</strong>
+        <input type="date" id="start"> đến <input type="date" id="end">
+        <button class="btn btn-filter" onclick="taiBaoCao()">Xem báo cáo</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nhân viên</th>
+                <th>Số đơn hàng</th>
+                <th>Tổng doanh thu</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            </tbody>
+    </table>
+</div>
+
+<script>
+    // Dữ liệu mẫu chỉ dành cho US15
+    const duLieuDonHang = [
+        { tenNV: "Nguyễn Văn A", soDon: 10, doanhThu: 5000000 },
+        { tenNV: "Trần Thị B", soDon: 8, doanhThu: 3200000 },
+        { tenNV: "Lê Văn C", soDon: 15, doanhThu: 7800000 }
+    ];
+
+    function taiBaoCao() {
+        const tbody = document.getElementById("tableBody");
+        tbody.innerHTML = ""; // Xóa trắng để tải mới
+
+        duLieuDonHang.forEach(item => {
+            const row = `<tr>
+                <td>${item.tenNV}</td>
+                <td>${item.soDon}</td>
+                <td>${item.doanhThu.toLocaleString()} VNĐ</td>
+                <td><button class="btn" onclick="alert('Đang tải chi tiết các đơn hàng của ' + '${item.tenNV}')">Xem chi tiết</button></td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+    }
+
+    // Tự động hiện báo cáo khi mở trang
+    window.onload = taiBaoCao;
+</script>
+
+</body>
+</html>

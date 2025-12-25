@@ -1,0 +1,50 @@
+class PaymentService {
+    constructor() {
+        this.vouchers = [
+            { code: "GIAM20", type: "FIXED", value: 20000, minOrder: 100000, expiry: "2025-12-31" }
+        ];
+        this.inventory = { "AO-THUN-01": 50, "QUAN-JEAN-02": 30 };
+    }
+
+    // Tiêu chí 1: Tự động tính tổng tiền từ danh sách sản phẩm
+    calculateSubtotal(items) {
+        return items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    }
+
+    // Tiêu chí 2: Kiểm tra Voucher
+    validateVoucher(code, subtotal) {
+        const v = this.vouchers.find(x => x.code === code);
+        const now = new Date();
+        if (!v) return { valid: false, msg: "Mã không tồn tại" };
+        if (new Date(v.expiry) < now) return { valid: false, msg: "Mã hết hạn" };
+        if (subtotal < v.minOrder) return { valid: false, msg: "Chưa đủ giá trị tối thiểu" };
+        return { valid: true, voucher: v };
+    }
+
+    // Tiêu chí 3 & 4: Xử lý thanh toán và trừ tồn kho
+    processPayment(orderData) {
+        const { items, voucherCode, paymentMethod } = orderData;
+        const subtotal = this.calculateSubtotal(items);
+        let discount = 0;
+
+        // Tính toán chiết khấu
+        if (voucherCode) {
+            const check = this.validateVoucher(voucherCode, subtotal);
+            if (check.valid) {
+                discount = check.voucher.type === "FIXED" ? check.voucher.value : (subtotal * check.voucher.value / 100);
+            }
+        }
+
+        const finalTotal = subtotal - discount;
+
+        // Tiêu chí 4: Trừ tồn kho và Lưu giao dịch
+        items.forEach(item => {
+            if (this.inventory[item.id]) this.inventory[item.id] -= item.quantity;
+        });
+
+        console.log(`--- HÓA ĐƠN ---`);
+        console.log(`Hình thức: ${paymentMethod}`); // Tiền mặt, Chuyển khoản, Thẻ
+        console.log(`Tổng cuối: ${finalTotal.toLocaleString()}đ`);
+        return { success: true, finalTotal };
+    }
+}
