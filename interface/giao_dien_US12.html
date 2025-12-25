@@ -1,0 +1,112 @@
+<!--us12-->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>US12 - Lịch Sử Chi Tiêu</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f5f6fa;
+    padding:40px
+}
+.container{
+    max-width:850px;
+    background:white;
+    margin:auto;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.15)
+}
+h2{margin-bottom:10px}
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px
+}
+th,td{
+    padding:10px;
+    border-bottom:1px solid #ddd
+}
+th{
+    background:#f8f8f8
+}
+.summary{
+    margin-top:20px;
+    padding:15px;
+    background:#e9f2ff;
+    border-radius:8px
+}
+.label{
+    font-weight:bold
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>📄 Lịch Sử Chi Tiêu Của Khách Hàng</h2>
+
+    <!-- 1️⃣ Danh sách đơn hàng -->
+    <table>
+        <thead>
+            <tr>
+                <th>Mã đơn</th>
+                <th>Ngày mua</th>
+                <th>Số tiền</th>
+            </tr>
+        </thead>
+        <tbody id="orderBody"></tbody>
+    </table>
+
+    <!-- 2️⃣ Tổng chi tiêu + 3️⃣ Điểm tích lũy -->
+    <div class="summary">
+        <p>
+            <span class="label">Tổng chi tiêu lũy kế:</span>
+            <span id="totalSpend">0</span> đ
+        </p>
+        <p>
+            <span class="label">Điểm tích lũy hiện tại:</span>
+            <span id="points">0</span> điểm
+        </p>
+    </div>
+</div>
+
+<script>
+// ====== DATA DEMO (GIẢ LẬP DB) ======
+const orders = [
+    { id:"HD001", date:"2025-01-01", amount: 450000 },
+    { id:"HD002", date:"2025-01-05", amount: 980000 },
+    { id:"HD003", date:"2025-01-12", amount: 320000 },
+    { id:"HD004", date:"2025-01-20", amount: 1500000 }
+];
+
+// ====== HIỂN THỊ DANH SÁCH + TÍNH TỔNG ======
+const body = document.getElementById("orderBody");
+let total = 0;
+
+orders.forEach(order => {
+    total += order.amount;
+    body.innerHTML += `
+        <tr>
+            <td>${order.id}</td>
+            <td>${order.date}</td>
+            <td>${order.amount.toLocaleString()} đ</td>
+        </tr>
+    `;
+});
+
+// ====== TỔNG CHI TIÊU ======
+document.getElementById("totalSpend").innerText =
+    total.toLocaleString();
+
+// ====== QUY ĐỔI ĐIỂM ======
+// Quy ước: 10.000đ = 1 điểm
+const points = Math.floor(total / 10000);
+document.getElementById("points").innerText = points;
+</script>
+
+</body>
+</html>

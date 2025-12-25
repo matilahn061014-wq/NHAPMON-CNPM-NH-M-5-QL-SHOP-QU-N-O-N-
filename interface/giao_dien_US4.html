@@ -1,0 +1,79 @@
+<!--us4-->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>US4-Thanh toán & Trừ tồn kho</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>🧾 Thanh toán & Trừ tồn kho</h2>
+
+    <!-- ================== PHẦN 1: THANH TOÁN ĐƠN HÀNG ================== -->
+    <div class="section">
+        <h3>Thông tin sản phẩm</h3>
+
+        <label>Sản phẩm</label>
+        <input type="text" id="productName" value="Áo thun nam">
+
+        <label>Số lượng</label>
+        <input type="number" id="quantity" value="1" min="1">
+
+        <label>Tồn kho hiện tại</label>
+        <input type="number" id="stock" value="50" disabled>
+    </div>
+
+    <div class="section">
+        <h3>Hình thức thanh toán</h3>
+        <select id="paymentMethod">
+            <option value="Tiền mặt">Tiền mặt</option>
+            <option value="Chuyển khoản">Chuyển khoản</option>
+            <option value="Thẻ ATM">Thẻ ATM</option>
+            <option value="Thẻ thành viên">Thẻ thành viên</option>
+        </select>
+    </div>
+
+    <button onclick="processPayment()">Thanh toán</button>
+
+
+    <hr>
+
+    <!-- ================== PHẦN 2: US04 - TRỪ TỒN KHO ================== -->
+    <div class="section">
+        <h3>US04 - Trừ tồn kho</h3>
+
+        <label>Tên sản phẩm</label>
+        <input type="text" id="product" value="Áo thun nam">
+
+        <label>Số lượng bán</label>
+        <input type="number" id="sellQuantity" value="1" min="1">
+
+        <label>Tồn kho hiện tại</label>
+        <input type="number" id="currentStock" value="20" disabled>
+    </div>
+
+    <div class="section">
+        <label>Phương thức thanh toán</label>
+        <select id="payment">
+            <option value="">-- Chọn --</option>
+            <option value="Tiền mặt">Tiền mặt</option>
+            <option value="Chuyển khoản">Chuyển khoản</option>
+        </select>
+    </div>
+
+    <button onclick="confirmPayment()">Xác nhận thanh toán</button>
+
+    <!-- Hóa đơn US04 -->
+    <div class="bill">
+        <h3>HÓA ĐƠN BÁN HÀNG</h3>
+        <div id="billContentUS04"></div>
+        <button onclick="window.print()">In hóa đơn</button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
