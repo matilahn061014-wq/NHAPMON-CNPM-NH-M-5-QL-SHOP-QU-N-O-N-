@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>US16 - Thông tin & Lương nhân viên</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 20px;
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 6px;
+            max-width: 600px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+        }
+        .btn-save {
+            background: #007bff;
+            color: white;
+            border: none;
+        }
+        .btn-save:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background: #eee;
+        }
+        .message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2>👤 Thông tin & Lương nhân viên</h2>
+
+<div class="container">
+    <label>Vai trò người dùng</label>
+    <select id="role" onchange="changeRole()">
+        <option value="staff">Nhân viên</option>
+        <option value="admin">Quản trị viên</option>
+    </select>
+</div>
+
+<div class="container">
+    <h3>Thông tin nhân viên</h3>
+
+    <label>Họ tên</label>
+    <input type="text" id="name">
+
+    <label>Số điện thoại</label>
+    <input type="text" id="phone">
+
+    <label>Vị trí</label>
+    <input type="text" id="position">
+
+    <label>Lương cơ bản</label>
+    <input type="number" id="salary">
+
+    <label>Tỷ lệ hoa hồng (%)</label>
+    <input type="number" id="commission">
+
+    <button class="btn-save" id="saveBtn" onclick="saveEmployee()">Lưu thông tin</button>
+
+    <div class="message" id="message"></div>
+</div>
+
+<div class="container">
+    <h3>📜 Lịch sử thay đổi lương / vị trí</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Thời gian</th>
+                <th>Vị trí</th>
+                <th>Lương</th>
+                <th>Hoa hồng</th>
+            </tr>
+        </thead>
+        <tbody id="historyTable"></tbody>
+    </table>
+</div>
+
+<script>
+    let employee = {
+        name: "Nguyễn Văn A",
+        phone: "0901234567",
+        position: "Nhân viên bán hàng",
+        salary: 6000000,
+        commission: 5
+    };
+
+    let history = [];
+
+    function loadEmployee() {
+        document.getElementById("name").value = employee.name;
+        document.getElementById("phone").value = employee.phone;
+        document.getElementById("position").value = employee.position;
+        document.getElementById("salary").value = employee.salary;
+        document.getElementById("commission").value = employee.commission;
+    }
+
+    loadEmployee();
+    changeRole();
+
+    function changeRole() {
+        const role = document.getElementById("role").value;
+        const isAdmin = role === "admin";
+
+        document.getElementById("salary").disabled = !isAdmin;
+        document.getElementById("commission").disabled = !isAdmin;
+        document.getElementById("saveBtn").disabled = !isAdmin;
+
+        if (!isAdmin) {
+            document.getElementById("message").innerText =
+                "⚠️ Chỉ quản trị viên mới có quyền chỉnh sửa thông tin lương";
+        } else {
+            document.getElementById("message").innerText = "";
+        }
+    }
+
+    function saveEmployee() {
+        const newPosition = document.getElementById("position").value;
+        const newSalary = Number(document.getElementById("salary").value);
+        const newCommission = Number(document.getElementById("commission").value);
+
+        history.push({
+            time: new Date().toLocaleString(),
+            position: newPosition,
+            salary: newSalary,
+            commission: newCommission
+        });
+
+        employee.position = newPosition;
+        employee.salary = newSalary;
+        employee.commission = newCommission;
+
+        renderHistory();
+
+        document.getElementById("message").style.color = "green";
+        document.getElementById("message").innerText =
+            "✅ Cập nhật thông tin nhân viên thành công";
+    }
+
+    function renderHistory() {
+        const table = document.getElementById("historyTable");
+        table.innerHTML = "";
+
+        history.forEach(h => {
+            table.innerHTML += `
+                <tr>
+                    <td>${h.time}</td>
+                    <td>${h.position}</td>
+                    <td>${h.salary}</td>
+                    <td>${h.commission}%</td>
+                </tr>
+            `;
+        });
+    }
+</script>
+
+</body>
+</html>

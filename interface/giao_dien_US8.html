@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Sửa sản phẩm</title>
+</head>
+<body>
+
+<h2>SỬA THÔNG TIN SẢN PHẨM</h2>
+
+<form onsubmit="return luuSua()">
+    <label>Tên sản phẩm:</label><br>
+    <input type="text" id="ten"><br><br>
+
+    <label>Danh mục:</label><br>
+    <input type="text" id="danhmuc"><br><br>
+
+    <label>Giá bán:</label><br>
+    <input type="number" id="gia"><br><br>
+
+    <label>Số lượng:</label><br>
+    <input type="number" id="soluong"><br><br>
+
+    <label>Mô tả:</label><br>
+    <textarea id="mota"></textarea><br><br>
+
+    <button type="submit">Lưu thay đổi</button>
+    <button type="button" onclick="huySua()">Hủy</button>
+</form>
+
+<p id="thongbao"></p>
+
+<script>
+var sanPham = {
+    ten: "Áo sơ mi nữ",
+    danhmuc: "Áo",
+    gia: 180000,
+    soluong: 20,
+    mota: "Áo sơ mi form rộng"
+};
+
+// Load dữ liệu ban đầu
+function loadForm() {
+    document.getElementById("ten").value = sanPham.ten;
+    document.getElementById("danhmuc").value = sanPham.danhmuc;
+    document.getElementById("gia").value = sanPham.gia;
+    document.getElementById("soluong").value = sanPham.soluong;
+    document.getElementById("mota").value = sanPham.mota;
+}
+loadForm();
+
+function luuSua() {
+    var ten = document.getElementById("ten").value.trim();
+    var danhmuc = document.getElementById("danhmuc").value.trim();
+    var gia = Number(document.getElementById("gia").value);
+    var soluong = Number(document.getElementById("soluong").value);
+    var mota = document.getElementById("mota").value.trim();
+    var thongbao = document.getElementById("thongbao");
+
+    if (ten === "" || danhmuc === "" || !gia || !soluong) {
+        thongbao.innerText = "❌ Không được để trống thông tin bắt buộc!";
+        thongbao.style.color = "red";
+        return false;
+    }
+
+    if (gia <= 0 || soluong <= 0) {
+        thongbao.innerText = "❌ Giá và số lượng phải lớn hơn 0!";
+        thongbao.style.color = "red";
+        return false;
+    }
+
+    sanPham.ten = ten;
+    sanPham.danhmuc = danhmuc;
+    sanPham.gia = gia;
+    sanPham.soluong = soluong;
+    sanPham.mota = mota;
+
+    thongbao.innerText = "✅ Cập nhật sản phẩm thành công!";
+    thongbao.style.color = "green";
+    return false;
+}
+
+function huySua() {
+    loadForm();
+    const thongbao = document.getElementById("thongbao");
+    thongbao.innerText = "⚠️ Đã hủy chỉnh sửa";
+    thongbao.style.color = "orange";
+}
+</script>
+
+</body>
+</html>
