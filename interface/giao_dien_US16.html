@@ -67,6 +67,7 @@
 
 <h2>👤 Thông tin & Lương nhân viên</h2>
 
+<!-- Chọn vai trò -->
 <div class="container">
     <label>Vai trò người dùng</label>
     <select id="role" onchange="changeRole()">
@@ -75,6 +76,7 @@
     </select>
 </div>
 
+<!-- Form thông tin nhân viên -->
 <div class="container">
     <h3>Thông tin nhân viên</h3>
 
@@ -98,6 +100,7 @@
     <div class="message" id="message"></div>
 </div>
 
+<!-- Lịch sử thay đổi -->
 <div class="container">
     <h3>📜 Lịch sử thay đổi lương / vị trí</h3>
     <table>
@@ -119,77 +122,4 @@
         phone: "0901234567",
         position: "Nhân viên bán hàng",
         salary: 6000000,
-        commission: 5
-    };
 
-    let history = [];
-
-    function loadEmployee() {
-        document.getElementById("name").value = employee.name;
-        document.getElementById("phone").value = employee.phone;
-        document.getElementById("position").value = employee.position;
-        document.getElementById("salary").value = employee.salary;
-        document.getElementById("commission").value = employee.commission;
-    }
-
-    loadEmployee();
-    changeRole();
-
-    function changeRole() {
-        const role = document.getElementById("role").value;
-        const isAdmin = role === "admin";
-
-        document.getElementById("salary").disabled = !isAdmin;
-        document.getElementById("commission").disabled = !isAdmin;
-        document.getElementById("saveBtn").disabled = !isAdmin;
-
-        if (!isAdmin) {
-            document.getElementById("message").innerText =
-                "⚠️ Chỉ quản trị viên mới có quyền chỉnh sửa thông tin lương";
-        } else {
-            document.getElementById("message").innerText = "";
-        }
-    }
-
-    function saveEmployee() {
-        const newPosition = document.getElementById("position").value;
-        const newSalary = Number(document.getElementById("salary").value);
-        const newCommission = Number(document.getElementById("commission").value);
-
-        history.push({
-            time: new Date().toLocaleString(),
-            position: newPosition,
-            salary: newSalary,
-            commission: newCommission
-        });
-
-        employee.position = newPosition;
-        employee.salary = newSalary;
-        employee.commission = newCommission;
-
-        renderHistory();
-
-        document.getElementById("message").style.color = "green";
-        document.getElementById("message").innerText =
-            "✅ Cập nhật thông tin nhân viên thành công";
-    }
-
-    function renderHistory() {
-        const table = document.getElementById("historyTable");
-        table.innerHTML = "";
-
-        history.forEach(h => {
-            table.innerHTML += `
-                <tr>
-                    <td>${h.time}</td>
-                    <td>${h.position}</td>
-                    <td>${h.salary}</td>
-                    <td>${h.commission}%</td>
-                </tr>
-            `;
-        });
-    }
-</script>
-
-</body>
-</html>
