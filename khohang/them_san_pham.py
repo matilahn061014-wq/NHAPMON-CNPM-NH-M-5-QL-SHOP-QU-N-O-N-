@@ -1,28 +1,53 @@
-class QuanLySanPham:
-    def __init__(self):
-        self.danh_sach_san_pham = []
+import os
 
-    def them_san_pham(self, ten, danh_muc, gia, so_luong, mo_ta=""):
-        # 1. Kiểm tra dữ liệu
-        loi = []
-        if not ten or not ten.strip(): loi.append("Tên sản phẩm không được để trống")
-        if not danh_muc or not danh_muc.strip(): loi.append("Danh mục không được để trống")
-        if not isinstance(gia, (int, float)) or gia < 0: loi.append("Giá bán không hợp lệ")
-        if not isinstance(so_luong, int) or so_luong < 0: loi.append("Số lượng không hợp lệ")
+class ProductManager:
+    def __init__(self, data_file):
+        self.data_file = data_file
 
-        if loi:
-            return {"trang_thai": "loi", "chi_tiet": loi}
+    def add_new_product(self, product_id, name, category, size, price, stock):
+        if not all([product_id, name, category, size, price, stock]):
+            print("❌ Lỗi: Vui lòng nhập đầy đủ thông tin sản phẩm!")
+            return False
 
-        # 2. Lưu sản phẩm
-        san_pham_moi = {
-            "id": len(self.danh_sach_san_pham) + 1,
-            "ten": ten.strip(),
-            "danh_muc": danh_muc.strip(),
-            "gia": gia,
-            "so_luong": so_luong,
-            "mo_ta": mo_ta
-        }
-        self.danh_sach_san_pham.append(san_pham_moi)
+        try:
+            price_val = float(price)
+            stock_val = int(stock)
+        except ValueError:
+            print("❌ Lỗi: Giá và số lượng phải là số hợp lệ!")
+            return False
 
-        # 3. Thông báo kết quả
-        return {"trang_thai": "thanh_cong", "du_lieu": san_pham_moi}
+        new_line = f"{product_id}|{name}|{category}|{size}|{price_val}|{stock_val}\n"
+
+        try:
+            with open(self.data_file, 'a', encoding='utf-8') as f:
+                f.write(new_line)
+            
+            print(f"✅ Thêm sản phẩm '{name}' thành công.")
+            return True
+        except Exception as e:
+            print(f"❌ Lỗi khi lưu: {e}")
+            return False
+
+    def show_all_products(self):
+        if not os.path.exists(self.data_file):
+            print("Hệ thống chưa có dữ liệu.")
+            return
+
+        print("\n--- DANH SÁCH SẢN PHẨM ---")
+        with open(self.data_file, 'r', encoding='utf-8') as f:
+            for line in f:
+                print(line.strip())
+
+if __name__ == "__main__":
+    manager = ProductManager('data.txt')
+
+    manager.add_new_product(
+        product_id="SP003",
+        name="Chân váy chữ A",
+        category="Váy",
+        size="S",
+        price="280000",
+        stock="20"
+    )
+
+    manager.show_all_products()
