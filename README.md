@@ -5,6 +5,32 @@ Nhóm thực hành gồm 5 thành viên:
 3. Nguyễn Thị Thúy Lê
 4. Nguyễn Phương Anh
 5. Nguyễn Quỳnh Hương
+   
+🛠 Hướng dẫn Cài đặt & Chạy Project
+1. Tải Project về máy
+Có 2 cách để lấy mã nguồn:
+Cách 1 (Dùng Git): Mở terminal và gõ lệnh:
+Bash
+git clone https://github.com/matilahn061014-wq/NHAPMON-CNPM-NH-M-5-QL-SHOP-QU-N-O-N-.git
+Cách 2 (Tải trực tiếp): Nhấn vào nút Code (màu xanh) trên GitHub và chọn Download ZIP, sau đó giải nén file vừa tải.
+2. Cài đặt môi trường phát triển 
+Để project chạy ổn định nhất và hỗ trợ tự động cập nhật khi sửa code, bạn nên sử dụng Visual Studio Code (VS Code):
+Tải và cài đặt VS Code.
+Mở thư mục project vừa tải về bằng VS Code.
+Cài đặt Extension Live Server:
+Vào mục Extensions (phím tắt Ctrl + Shift + X).
+Tìm kiếm "Live Server" và nhấn Install.
+3. Cách chạy chương trình
+Cách 1 (Dùng Live Server):
+Mở file .html bất kỳ trong thư mục interface.
+Chuột phải vào màn hình code và chọn Open with Live Server.
+Trình duyệt sẽ tự động mở giao diện tại địa chỉ: http://127.0.0.1:5500.
+Cách 2 (Mở thủ công):
+Truy cập vào thư mục interface.
+Click đúp chuột vào file giao_dien_US01.html (hoặc file trang chủ) để mở bằng trình duyệt (Chrome, Edge...).
+⚠️ Lưu ý quan trọng
+Hỗ trợ trình duyệt: Tốt nhất trên Google Chrome hoặc Microsoft Edge bản mới nhất.
+Độ phân giải: Giao diện đang được tối ưu hóa cho màn hình Desktop (1920x1080).
 
 A. MÔ TẢ HỆ THỐNG: ​Hệ thống quản lý shop quần áo nữ giúp các cửa hàng thời trang nữ tối ưu hóa quy trình bán hàng và quản lý tồn kho đa thuộc tính. Mục tiêu là tăng tốc độ xử lý đơn hàng và nhận diện mẫu mã bán chạy để ra quyết định kinh doanh kịp thời, tăng lợi nhuận.
 ​Hệ thống được thiết kế cho các đối tượng sử dụng chính:
@@ -27,6 +53,7 @@ A. MÔ TẢ HỆ THỐNG: ​Hệ thống quản lý shop quần áo nữ giúp 
 - ​Chính sách tích điểm rõ ràng.
 - ​Đổi trả dễ dàng – minh bạch.
 - ​Trải nghiệm chuyên nghiệp hơn.
+  
 D. QUY TRÌNH VẬN HÀNH CỦA HỆ THỐNG
 1. Giai đoạn Nhập hàng & Quản lý kho
 Đây là bước đầu tiên để hệ thống có dữ liệu vận hành:
