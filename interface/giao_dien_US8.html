@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý sản phẩm - Nhóm 5</title>
+    <style>
+        :root {
+            --pink-primary: #ff85a2;
+            --pink-light: #fff0f3;
+            --text-dark: #4a4a4a;
+            --bg-body: #fdf2f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-body);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(255, 133, 162, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: var(--pink-primary);
+            font-size: 24px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table th {
+            background-color: var(--pink-primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ffe4eb;
+            font-size: 14px;
+        }
+
+        table tr:hover {
+            background-color: var(--pink-light);
+        }
+
+        /* Nút sửa */
+        .btn-edit {
+            background-color: var(--pink-primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            transition: 0.3s;
+        }
+
+        .btn-edit:hover {
+            background-color: #ff6b8e;
+            transform: scale(1.05);
+        }
+
+        /* Badge cho Size và Màu */
+        .badge {
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>NHÓM 5 - QUẢN LÝ SHOP QUẦN ÁO NỮ</h1>
+        <p style="color: #888;">Danh sách sản phẩm hệ thống</p>
+    </header>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã SP</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Size</th>
+                    <th>Màu sắc</th>
+                    <th>Giá bán</th>
+                    <th>Chất liệu</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody id="productTable">
+                <tr>
+                    <td><b>SP001</b></td>
+                    <td>Váy hoa nhí Vintage</td>
+                    <td><span class="badge">M</span></td>
+                    <td>Hồng kem</td>
+                    <td>350.000đ</td>
+                    <td>Lụa Pháp</td>
+                    <td><button class="btn-edit" onclick="goToEdit('SP001')">SỬA</button></td>
+                </tr>
+                <tr>
+                    <td><b>SP002</b></td>
+                    <td>Áo khoác Blazer</td>
+                    <td><span class="badge">L</span></td>
+                    <td>Be</td>
+                    <td>550.000đ</td>
+                    <td>Vải Tuyết mưa</td>
+                    <td><button class="btn-edit" onclick="goToEdit('SP002')">SỬA</button></td>
+                </tr>
+                <tr>
+                    <td><b>SP003</b></td>
+                    <td>Chân váy xếp ly</td>
+                    <td><span class="badge">S</span></td>
+                    <td>Đen</td>
+                    <td>220.000đ</td>
+                    <td>Kaki Nhật</td>
+                    <td><button class="btn-edit" onclick="goToEdit('SP003')">SỬA</button></td>
+                </tr>
+                <tr>
+                    <td><b>SP004</b></td>
+                    <td>Đầm suông dự tiệc</td>
+                    <td><span class="badge">M</span></td>
+                    <td>Đỏ đô</td>
+                    <td>480.000đ</td>
+                    <td>Gấm cao cấp</td>
+                    <td><button class="btn-edit" onclick="goToEdit('SP004')">SỬA</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<script>
+    function goToEdit(id) {
+        // Trong thực tế, bạn sẽ chuyển sang trang sửa kèm theo mã ID
+        alert("Đang xuất dữ liệu sản phẩm " + id + " sang form chỉnh sửa...");
+        // window.location.href = "sua_san_pham.html?id=" + id;
+    }
+</script>
+
+</body>
+</html>
