@@ -2,41 +2,186 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Thêm Sản Phẩm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Sản Phẩm - Nhóm 5 Quản Lý Shop</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #fdf2f5; display: flex; justify-content: center; padding: 40px; }
-        .form-container { width: 100%; max-width: 450px; background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #ffe4eb; }
-        h2 { color: #ff85a2; text-align: center; margin-bottom: 20px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 14px; }
-        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; }
-        .btn-submit { width: 100%; padding: 15px; background: #ff85a2; color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .btn-submit:hover { background: #f06292; }
+        :root {
+            --pink-primary: #ff85a2;
+            --pink-hover: #ff6b8e;
+            --pink-light: #fff0f3;
+            --text-dark: #4a4a4a;
+            --bg-body: #fdf2f5;
+            --error-color: #ff4d4d;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-body);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 133, 162, 0.15);
+            padding: 30px;
+            border: 1px solid #ffe4eb;
+        }
+
+        h2 {
+            color: var(--pink-primary);
+            text-align: center;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--pink-primary);
+            box-shadow: 0 0 5px rgba(255, 133, 162, 0.3);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--pink-primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--pink-hover);
+            transform: translateY(-2px);
+        }
+
+        .message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .success { background-color: #d4edda; color: #155724; display: block; }
+        .error { background-color: #f8d7da; color: #721c24; display: block; }
     </style>
 </head>
 <body>
+
 <div class="form-container">
     <h2>👗 THÊM SẢN PHẨM MỚI</h2>
+    
+    <div id="statusMsg" class="message"></div>
+
     <form id="productForm">
-        <div class="form-group"><label>Tên sản phẩm *</label><input type="text" id="pName" placeholder="Nhập tên sản phẩm..."></div>
-        <div class="form-group"><label>Danh mục *</label>
-            <select id="pCategory"><option value="Váy">Váy/Đầm</option><option value="Áo">Áo nữ</option><option value="Quần">Quần/Chân váy</option></select>
+        <div class="form-group">
+            <label>Tên sản phẩm *</label>
+            <input type="text" id="pName" placeholder="Ví dụ: Váy hoa nhí Vintage">
         </div>
+
+        <div class="form-group">
+            <label>Danh mục *</label>
+            <select id="pCategory">
+                <option value="">-- Chọn danh mục --</option>
+                <option value="Váy/Đầm">Váy/Đầm</option>
+                <option value="Áo nữ">Áo nữ</option>
+                <option value="Quần/Chân váy">Quần/Chân váy</option>
+                <option value="Phụ kiện">Phụ kiện</option>
+            </select>
+        </div>
+
         <div style="display: flex; gap: 15px;">
-            <div class="form-group" style="flex: 1;"><label>Giá (VND) *</label><input type="number" id="pPrice"></div>
-            <div class="form-group" style="flex: 1;"><label>Số lượng *</label><input type="number" id="pQty"></div>
+            <div class="form-group" style="flex: 1;">
+                <label>Giá bán (VND) *</label>
+                <input type="number" id="pPrice" placeholder="0">
+            </div>
+            <div class="form-group" style="flex: 1;">
+                <label>Số lượng *</label>
+                <input type="number" id="pQty" placeholder="0">
+            </div>
         </div>
-        <button type="button" class="btn-submit" onclick="save()">LƯU SẢN PHẨM</button>
+
+        <div class="form-group">
+            <label>Mô tả (nếu có)</label>
+            <textarea id="pDesc" rows="3" placeholder="Chất liệu, màu sắc..."></textarea>
+        </div>
+
+        <button type="button" class="btn-submit" onclick="validateAndSave()">LƯU SẢN PHẨM</button>
     </form>
 </div>
+
+
+
 <script>
-    function save() {
-        const n = document.getElementById('pName').value;
-        const p = document.getElementById('pPrice').value;
-        if(!n || !p) { alert("Vui lòng nhập đủ thông tin!"); return; }
-        alert("✅ Đã lưu: " + n);
+    function validateAndSave() {
+        // Lấy dữ liệu
+        const name = document.getElementById('pName').value.trim();
+        const category = document.getElementById('pCategory').value;
+        const price = document.getElementById('pPrice').value;
+        const qty = document.getElementById('pQty').value;
+        const msgBox = document.getElementById('statusMsg');
+
+        // 1. Kiểm tra dữ liệu (AC - Không để trống)
+        if (!name || !category || !price || !qty) {
+            msgBox.textContent = "❌ Vui lòng nhập đầy đủ các thông tin bắt buộc (*)";
+            msgBox.className = "message error";
+            return;
+        }
+
+        // 2. Kiểm tra tính hợp lệ (Giá và số lượng > 0)
+        if (parseFloat(price) <= 0 || parseInt(qty) < 0) {
+            msgBox.textContent = "❌ Giá bán và số lượng phải là số dương hợp lệ!";
+            msgBox.className = "message error";
+            return;
+        }
+
+        // 3. Thông báo kết quả (Giả lập lưu thành công)
+        msgBox.textContent = "✅ Thêm sản phẩm '" + name + "' thành công!";
+        msgBox.className = "message success";
+
+        // Xóa form sau khi thêm thành công
         document.getElementById('productForm').reset();
+
+        // Tiêu chí làm việc: Thông thường ở đây bạn sẽ gọi API để lưu vào database/file
+        console.log("Đã lưu vào hệ thống:", { name, category, price, qty });
     }
 </script>
+
 </body>
 </html>

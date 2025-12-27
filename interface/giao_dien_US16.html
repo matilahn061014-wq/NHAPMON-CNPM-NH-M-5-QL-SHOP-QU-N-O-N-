@@ -2,124 +2,129 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>US16 - Thông tin & Lương nhân viên</title>
+    <title>Nhóm 5 - Quản Lý Nhân Sự & Lương - Lady Shop</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            padding: 20px;
-        }
-        h2 {
-            margin-bottom: 10px;
-        }
-        .container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 6px;
-            max-width: 600px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.1);
-            margin-bottom: 25px;
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-        }
-        button {
-            margin-top: 15px;
-            padding: 10px;
-            width: 100%;
-            cursor: pointer;
-        }
-        .btn-save {
-            background: #007bff;
-            color: white;
-            border: none;
-        }
-        .btn-save:disabled {
-            background: #aaa;
-            cursor: not-allowed;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background: #eee;
-        }
-        .message {
-            margin-top: 10px;
-            font-weight: bold;
-        }
+        :root { --pink-main: #ff85a2; --pink-bg: #fff5f7; --dark: #2c3e50; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--pink-bg); margin: 0; padding: 20px; }
+        .container { max-width: 1100px; margin: auto; }
+        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        h2 { color: var(--pink-main); border-left: 5px solid var(--pink-main); padding-left: 15px; margin-top: 0; text-transform: uppercase; font-size: 18px; }
+        
+        /* Table Style */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; }
+        th { background: var(--pink-main); color: white; padding: 12px; text-align: left; font-size: 14px; }
+        td { padding: 12px; border-bottom: 1px solid #eee; font-size: 14px; }
+        tr:hover { background: #fff0f3; }
+        
+        /* Form Style */
+        .form-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 15px; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; outline: none; }
+        input:focus { border-color: var(--pink-main); }
+        .btn { background: var(--pink-main); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; }
+        .btn:hover { background: #f06292; transform: translateY(-1px); }
+
+        .salary-badge { background: #e8f5e9; color: #2e7d32; padding: 5px 10px; border-radius: 15px; font-weight: bold; }
+        .btn-log { color: #5c6bc0; border:none; background:none; cursor:pointer; font-weight: bold; text-decoration: underline; }
     </style>
 </head>
 <body>
 
-<h2>👤 Thông tin & Lương nhân viên</h2>
-
-<!-- Chọn vai trò -->
 <div class="container">
-    <label>Vai trò người dùng</label>
-    <select id="role" onchange="changeRole()">
-        <option value="staff">Nhân viên</option>
-        <option value="admin">Quản trị viên</option>
-    </select>
+    <header style="text-align: center; margin-bottom: 30px;">
+        <h1 style="color: var(--pink-main); margin: 0;">🎀 QUẢN LÝ NHÂN SỰ LADY SHOP 🎀</h1>
+        <p style="color: #666;">Nhóm 5 - Hệ thống quản lý nội bộ</p>
+    </header>
+
+    <div class="card">
+        <h2>👥 Thêm Hồ Sơ Nhân Viên Mới</h2>
+        <div class="form-row">
+            <input type="text" id="nvId" placeholder="Mã NV (VD: NV01)">
+            <input type="text" id="nvName" placeholder="Họ và tên">
+            <input type="text" id="nvPhone" placeholder="Số điện thoại">
+        </div>
+        <div class="form-row">
+            <select id="nvPos">
+                <option value="Bán hàng">Bán hàng</option>
+                <option value="Thu ngân">Thu ngân</option>
+                <option value="Quản lý">Quản lý</option>
+            </select>
+            <input type="number" id="nvBase" placeholder="Lương cơ bản (VNĐ)">
+            <input type="number" step="0.01" id="nvComm" placeholder="Tỉ lệ hoa hồng (VD: 0.05)">
+        </div>
+        <button onclick="addEmployee()" class="btn">LƯU THÔNG TIN NHÂN VIÊN</button>
+    </div>
+
+    <div class="card">
+        <h2>💰 Danh Sách Lương & Nhân Sự</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã NV</th>
+                    <th>Họ Tên</th>
+                    <th>Vị Trí</th>
+                    <th>Lương Cơ Bản</th>
+                    <th>Hoa Hồng</th>
+                    <th>Tổng Nhận (Dự tính)</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody id="employeeTable">
+                <tr>
+                    <td>NV01</td>
+                    <td>Nguyễn Văn A</td>
+                    <td>Quản lý</td>
+                    <td>7,000,000đ</td>
+                    <td>5%</td>
+                    <td><span class="salary-badge">7,350,000đ</span></td>
+                    <td><button class="btn-log" onclick="viewLog('Nguyễn Văn A')">Lịch Sử Log</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<!-- Form thông tin nhân viên -->
-<div class="container">
-    <h3>Thông tin nhân viên</h3>
-
-    <label>Họ tên</label>
-    <input type="text" id="name">
-
-    <label>Số điện thoại</label>
-    <input type="text" id="phone">
-
-    <label>Vị trí</label>
-    <input type="text" id="position">
-
-    <label>Lương cơ bản</label>
-    <input type="number" id="salary">
-
-    <label>Tỷ lệ hoa hồng (%)</label>
-    <input type="number" id="commission">
-
-    <button class="btn-save" id="saveBtn" onclick="saveEmployee()">Lưu thông tin</button>
-
-    <div class="message" id="message"></div>
-</div>
-
-<!-- Lịch sử thay đổi -->
-<div class="container">
-    <h3>📜 Lịch sử thay đổi lương / vị trí</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Thời gian</th>
-                <th>Vị trí</th>
-                <th>Lương</th>
-                <th>Hoa hồng</th>
-            </tr>
-        </thead>
-        <tbody id="historyTable"></tbody>
-    </table>
-</div>
+[Image of an organizational chart for a small business]
 
 <script>
-    let employee = {
-        name: "Nguyễn Văn A",
-        phone: "0901234567",
-        position: "Nhân viên bán hàng",
-        salary: 6000000,
+    function addEmployee() {
+        // Lấy dữ liệu từ input
+        const id = document.getElementById('nvId').value;
+        const name = document.getElementById('nvName').value;
+        const phone = document.getElementById('nvPhone').value;
+        const pos = document.getElementById('nvPos').value;
+        const base = parseFloat(document.getElementById('nvBase').value);
+        const comm = parseFloat(document.getElementById('nvComm').value);
 
+        // Kiểm tra hợp lệ (AC)
+        if (!id || !name || isNaN(base)) {
+            alert("❌ Vui lòng nhập đầy đủ Mã, Tên và Lương!");
+            return;
+        }
+
+        // Tính tổng nhận dự tính
+        const total = base + (base * comm);
+
+        // Thêm vào bảng
+        const table = document.getElementById('employeeTable');
+        const row = table.insertRow();
+        row.innerHTML = `
+            <td>${id}</td>
+            <td>${name}</td>
+            <td>${pos}</td>
+            <td>${base.toLocaleString()}đ</td>
+            <td>${(comm * 100).toFixed(0)}%</td>
+            <td><span class="salary-badge">${total.toLocaleString()}đ</span></td>
+            <td><button class="btn-log" onclick="viewLog('${name}')">Lịch Sử Log</button></td>
+        `;
+
+        // Xóa form
+        alert("✅ Đã lưu nhân viên: " + name);
+    }
+
+    function viewLog(name) {
+        alert("--- NHẬT KÝ HỆ THỐNG ---\nNhân viên: " + name + "\n1. 27/12: Cập nhật vị trí công tác.\n2. 20/12: Khen thưởng doanh số tháng.");
+    }
+</script>
+
+</body>
+</html>
