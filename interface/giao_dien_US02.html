@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Sản Phẩm</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #fdf2f5; display: flex; justify-content: center; padding: 40px; }
+        .form-container { width: 100%; max-width: 450px; background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #ffe4eb; }
+        h2 { color: #ff85a2; text-align: center; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 14px; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; }
+        .btn-submit { width: 100%; padding: 15px; background: #ff85a2; color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .btn-submit:hover { background: #f06292; }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2>👗 THÊM SẢN PHẨM MỚI</h2>
+    <form id="productForm">
+        <div class="form-group"><label>Tên sản phẩm *</label><input type="text" id="pName" placeholder="Nhập tên sản phẩm..."></div>
+        <div class="form-group"><label>Danh mục *</label>
+            <select id="pCategory"><option value="Váy">Váy/Đầm</option><option value="Áo">Áo nữ</option><option value="Quần">Quần/Chân váy</option></select>
+        </div>
+        <div style="display: flex; gap: 15px;">
+            <div class="form-group" style="flex: 1;"><label>Giá (VND) *</label><input type="number" id="pPrice"></div>
+            <div class="form-group" style="flex: 1;"><label>Số lượng *</label><input type="number" id="pQty"></div>
+        </div>
+        <button type="button" class="btn-submit" onclick="save()">LƯU SẢN PHẨM</button>
+    </form>
+</div>
+<script>
+    function save() {
+        const n = document.getElementById('pName').value;
+        const p = document.getElementById('pPrice').value;
+        if(!n || !p) { alert("Vui lòng nhập đủ thông tin!"); return; }
+        alert("✅ Đã lưu: " + n);
+        document.getElementById('productForm').reset();
+    }
+</script>
+</body>
+</html>
