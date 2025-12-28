@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Lady Shop - Tạo Đơn Hàng</title>
+    <style>
+        :root { --pink-primary: #ff85a2; --text-gray: #757575; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #fff9fa; display: flex; justify-content: center; padding: 20px; }
+        .container { width: 100%; max-width: 400px; background: white; border-radius: 30px; box-shadow: 0 15px 35px rgba(255,133,162,0.2); padding: 30px 20px; text-align: center; }
+        .header-title { color: var(--pink-primary); font-size: 24px; font-weight: 800; margin-bottom: 20px; }
+        .scan-container { border: 3px solid var(--pink-primary); border-radius: 15px; padding: 15px; margin-bottom: 25px; }
+        #barcode-input { width: 100%; border: none; outline: none; font-size: 18px; text-align: center; text-transform: uppercase; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th { background: var(--pink-primary); color: white; padding: 10px; font-size: 12px; }
+        td { padding: 12px 5px; border-bottom: 1px solid #eee; font-size: 13px; }
+        .total-section { border-top: 2px dashed #ffc1d1; padding-top: 20px; display: flex; justify-content: space-between; font-weight: bold; }
+        .total-amount { color: var(--pink-primary); font-size: 24px; }
+        .pay-btn { width: 48%; padding: 12px; border-radius: 10px; border: 2px solid var(--pink-primary); font-weight: bold; cursor: pointer; }
+        .btn-cash { background: var(--pink-primary); color: white; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header-title">👗 LADY SHOP - TẠO ĐƠN</div>
+    <p style="font-size: 13px;">Đặt con trỏ vào đây để quét mã:</p>
+    <div class="scan-container">
+        <input type="text" id="barcode-input" placeholder="QUÉT MÃ TẠI ĐÂY" autofocus>
+    </div>
+    <table>
+        <thead>
+            <tr><th>Sản phẩm</th><th>Size</th><th>Giá</th><th>SL</th><th>Tổng</th></tr>
+        </thead>
+        <tbody id="cart-items"></tbody>
+    </table>
+    <div class="total-section">
+        <span>TỔNG CỘNG:</span>
+        <span class="total-amount"><span id="total-price">0</span> VND</span>
+    </div>
+    <div style="display:flex; justify-content: space-between; margin-top: 20px;">
+        <button class="pay-btn btn-cash" onclick="finish('Tiền mặt')">TIỀN MẶT</button>
+        <button class="pay-btn" onclick="finish('Chuyển khoản')">BANKING</button>
+    </div>
+</div>
+<script>
+    const db = { "SP001": { name: "Sơ Mi Lụa", size: "S", price: 250000 }, "SP002": { name: "Sơ Mi Lụa", size: "M", price: 250000 }, "SP003": { name: "Váy Chữ A", size: "S", price: 320000 } };
+    let cart = [];
+    document.getElementById('barcode-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            const item = db[this.value.toUpperCase()];
+            if (item) { cart.push(item); render(); } else { alert("Không thấy mã này!"); }
+            this.value = '';
+        }
+    });
+    function render() {
+        const tbody = document.getElementById('cart-items');
+        tbody.innerHTML = ''; let total = 0;
+        cart.forEach(item => {
+            total += item.price;
+            tbody.innerHTML += `<tr><td>${item.name}</td><td>${item.size}</td><td>${item.price.toLocaleString()}</td><td>1</td><td>${item.price.toLocaleString()}</td></tr>`;
+        });
+        document.getElementById('total-price').innerText = total.toLocaleString();
+    }
+    function finish(m) { if(cart.length===0) return; alert("Đã thanh toán: " + m); cart = []; render(); }
+</script>
+</body>
+</html>

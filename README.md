@@ -7,30 +7,35 @@ Nhóm thực hành gồm 5 thành viên:
 5. Nguyễn Quỳnh Hương
    
 🛠 Hướng dẫn Cài đặt & Chạy Project
-1. Tải Project về máy
-Có 2 cách để lấy mã nguồn:
-Cách 1 (Dùng Git): Mở terminal và gõ lệnh:
-Bash
-git clone https://github.com/matilahn061014-wq/NHAPMON-CNPM-NH-M-5-QL-SHOP-QU-N-O-N-.git
-Cách 2 (Tải trực tiếp): Nhấn vào nút Code (màu xanh) trên GitHub và chọn Download ZIP, sau đó giải nén file vừa tải.
-2. Cài đặt môi trường phát triển 
-Để project chạy ổn định nhất và hỗ trợ tự động cập nhật khi sửa code, bạn nên sử dụng Visual Studio Code (VS Code):
-Tải và cài đặt VS Code.
-Mở thư mục project vừa tải về bằng VS Code.
-Cài đặt Extension Live Server:
-Vào mục Extensions (phím tắt Ctrl + Shift + X).
-Tìm kiếm "Live Server" và nhấn Install.
-3. Cách chạy chương trình
-Cách 1 (Dùng Live Server):
-Mở file .html bất kỳ trong thư mục interface.
-Chuột phải vào màn hình code và chọn Open with Live Server.
-Trình duyệt sẽ tự động mở giao diện tại địa chỉ: http://127.0.0.1:5500.
-Cách 2 (Mở thủ công):
-Truy cập vào thư mục interface.
-Click đúp chuột vào file giao_dien_US01.html (hoặc file trang chủ) để mở bằng trình duyệt (Chrome, Edge...).
-⚠️ Lưu ý quan trọng
-Hỗ trợ trình duyệt: Tốt nhất trên Google Chrome hoặc Microsoft Edge bản mới nhất.
-Độ phân giải: Giao diện đang được tối ưu hóa cho màn hình Desktop (1920x1080).
+ 🛒 DỰ ÁN QUẢN LÝ SHOP QUẦN ÁO - NHÓM 5
+📋 1. YÊU CẦU HỆ THỐNG 
+Ngôn ngữ lập trình: Python 3.x trở lên.
+Trình duyệt: Ưu tiên Google Chrome hoặc Microsoft Edge bản mới nhất.
+Công cụ hỗ trợ: Visual Studio Code (VS Code).
+
+🚀 2. HƯỚNG DẪN CÀI ĐẶT CHI TIẾT
+Bước 1: Tải mã nguồn
+* Mở Terminal/Command Prompt và sử dụng lệnh Git Clone:
+  `git clone https://github.com/matilahn061014-wq/NHAPMON-CNPM-NH-M-5-QL-SHOP-QU-N-O-N-.git`
+* Hoặc tải trực tiếp file ZIP từ GitHub và giải nén vào thư mục làm việc.
+Bước 2: Thiết lập môi trường
+1. Mở thư mục dự án bằng phần mềm **VS Code**.
+2. Cài đặt Extension **Live Server** (Phím tắt `Ctrl+Shift+X` -> Tìm "Live Server" -> Nhấn Install).
+3. Đảm bảo máy đã cài đặt Python (Kiểm tra bằng lệnh `python --version` trong terminal).
+   
+💻 3. HƯỚNG DẪN VẬN HÀNH 
+ 3.1. Chạy Giao diện người dùng 
+1. Truy cập vào thư mục `interface`.
+2. Tìm và mở file **`giao_dien_US01.html`**.
+3. Chuột phải vào màn hình code, chọn **Open with Live Server**.
+4. Trình duyệt sẽ tự động mở giao diện tại: `http://127.0.0.1:5500`.
+ 3.2. Chạy chức năng Quản lý 
+Sử dụng Terminal trong VS Code (Phím tắt `` Ctrl + ` ``) để chạy các file xử lý dữ liệu
+
+ ⚠️ 4. CÁC QUY TẮC QUAN TRỌNG
+* Dữ liệu hệ thống:** Tuyệt đối không xóa hoặc đổi tên file `data.txt` và `nhanvien.txt` vì đây là nơi lưu trữ toàn bộ thông tin.
+* Địa chỉ truy cập:** Chỉ sử dụng địa chỉ `localhost (127.0.0.1)` do Live Server cung cấp. **Không tự ý thay đổi (fake) địa chỉ IP** để tránh lỗi script.
+* Độ phân giải:** Giao diện được tối ưu hóa cho màn hình Desktop độ phân giải **1920x1080**.
 
 A. MÔ TẢ HỆ THỐNG: ​Hệ thống quản lý shop quần áo nữ giúp các cửa hàng thời trang nữ tối ưu hóa quy trình bán hàng và quản lý tồn kho đa thuộc tính. Mục tiêu là tăng tốc độ xử lý đơn hàng và nhận diện mẫu mã bán chạy để ra quyết định kinh doanh kịp thời, tăng lợi nhuận.
 ​Hệ thống được thiết kế cho các đối tượng sử dụng chính:
