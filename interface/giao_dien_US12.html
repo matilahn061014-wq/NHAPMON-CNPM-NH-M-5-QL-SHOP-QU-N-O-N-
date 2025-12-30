@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>US12 · Lịch Sử Chi Tiêu</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --primary:#4f46e5;
+    --primary-dark:#4338ca;
+    --bg:#f4f6fb;
+    --card:#ffffff;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --border:#e5e7eb;
+    --success:#16a34a;
+}
+*{box-sizing:border-box;font-family:'Inter',sans-serif}
+
+body{
+    margin:0;
+    background:linear-gradient(135deg,#eef2ff,#f8fafc);
+    padding:40px 16px;
+    color:var(--text)
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:24px
+}
+
+.header h2{
+    margin:0;
+    font-size:26px;
+    font-weight:700
+}
+
+.header span{
+    font-size:13px;
+    color:var(--muted)
+}
+
+.card{
+    background:var(--card);
+    border-radius:18px;
+    padding:24px;
+    box-shadow:0 20px 40px rgba(0,0,0,.08)
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0;
+    margin-top:10px
+}
+
+th,td{
+    padding:14px 12px;
+    border-bottom:1px solid var(--border);
+    font-size:14px
+}
+
+th{
+    text-align:left;
+    background:#f8fafc;
+    font-weight:600;
+    color:#374151
+}
+
+tr:hover td{background:#f9fafb}
+
+.badge{
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+    background:#eef2ff;
+    color:var(--primary)
+}
+
+.amount{
+    font-weight:600
+}
+
+.summary-grid{
+    margin-top:24px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:16px
+}
+
+.summary-card{
+    background:linear-gradient(135deg,#eef2ff,#ffffff);
+    border-radius:16px;
+    padding:20px;
+    border:1px solid var(--border)
+}
+
+.summary-card h4{
+    margin:0 0 6px;
+    font-size:14px;
+    color:var(--muted);
+    font-weight:500
+}
+
+.summary-card .value{
+    font-size:22px;
+    font-weight:700
+}
+
+.footer{
+    margin-top:28px;
+    text-align:center;
+    font-size:13px;
+    color:var(--muted)
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h2>📄 Lịch sử chi tiêu</h2>
+        <span>US12 · Customer Spending History</span>
+    </div>
+
+    <div class="card">
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã đơn</th>
+                        <th>Ngày mua</th>
+                        <th>Số tiền</th>
+                    </tr>
+                </thead>
+                <tbody id="orderBody"></tbody>
+            </table>
+        </div>
+
+        <div class="summary-grid">
+            <div class="summary-card">
+                <h4>Tổng chi tiêu lũy kế</h4>
+                <div class="value" id="totalSpend">0 đ</div>
+            </div>
+
+            <div class="summary-card">
+                <h4>Điểm tích lũy hiện tại</h4>
+                <div class="value" id="points">0 điểm</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">© 2025 · Analytics UI · Senior Dashboard Style</div>
+</div>
+
+<script>
+const orders=[
+    {id:"HD001",date:"2025-01-01",amount:450000},
+    {id:"HD002",date:"2025-01-05",amount:980000},
+    {id:"HD003",date:"2025-01-12",amount:320000},
+    {id:"HD004",date:"2025-01-20",amount:1500000}
+];
+
+const body=document.getElementById("orderBody");
+let total=0;
+
+orders.forEach(o=>{
+    total+=o.amount;
+    body.innerHTML+=`
+        <tr>
+            <td><span class="badge">${o.id}</span></td>
+            <td>${o.date}</td>
+            <td class="amount">${o.amount.toLocaleString()} đ</td>
+        </tr>`;
+});
+
+document.getElementById("totalSpend").innerText=total.toLocaleString()+" đ";
+const points=Math.floor(total/10000);
+document.getElementById("points").innerText=points+" điểm";
+</script>
+
+</body>
+</html>
