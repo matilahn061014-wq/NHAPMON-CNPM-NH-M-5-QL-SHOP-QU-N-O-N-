@@ -59,3 +59,4 @@ console.log(generateTopSellingReport({
   topN: 5,
   byVariant: false
 }));
+
