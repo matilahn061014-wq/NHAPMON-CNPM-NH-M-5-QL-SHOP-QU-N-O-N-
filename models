@@ -1,0 +1,26 @@
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
+db = SQLAlchemy()
+
+# EPIC 2: KHO & SẢN PHẨM (US9, US10)
+class Product(db.Model):
+    id = db.Column(db.String(50), primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    price = db.Column(db.Float, default=0)
+    stock = db.Column(db.Integer, default=0)
+
+# EPIC 3: KHÁCH HÀNG (US11, US12, US13)
+class Customer(db.Model):
+    phone = db.Column(db.String(20), primary_key=True)
+    name = db.Column(db.String(100))
+    points = db.Column(db.Integer, default=0)
+
+# EPIC 1 & 5: BÁN HÀNG & BÁO CÁO (US1, US3, US17)
+class Invoice(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    # Khóa liên kết với Khách hàng (Anh em ruột)
+    customer_phone = db.Column(db.String(20), db.ForeignKey('customer.phone'))
+    total_amount = db.Column(db.Float)
+    voucher_code = db.Column(db.String(50))
+    timestamp = db.Column(db.DateTime, default=datetime.now)
