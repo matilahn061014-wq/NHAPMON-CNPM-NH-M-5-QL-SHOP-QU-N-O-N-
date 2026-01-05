@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>🛍️ Quầy Bán Hàng</h1>
+    <div class="card">
+        <h3>Quét mã / Chọn sản phẩm</h3>
+        <form method="POST" action="/thanh-toan">
+            <select name="product_id" style="padding: 10px; width: 300px; margin-bottom: 10px; display: block;">
+                {% for p in products %}
+                <option value="{{ p.id }}">{{ p.name }} - {{ "{:,.0f}".format(p.price) }} VNĐ (Kho: {{ p.stock }})</option>
+                {% endfor %}
+            </select>
+            <input type="text" name="voucher" placeholder="Nhập mã Voucher (US3)" style="padding: 10px; width: 280px; margin-bottom: 10px; display: block;">
+            <button type="submit" class="btn">THANH TOÁN & TRỪ KHO</button>
+        </form>
+    </div>
+{% endblock %}
