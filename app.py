@@ -1,37 +1,17 @@
-from flask import Flask, render_template, request, redirect, flash
-from models import db, Product, Customer, Invoice
+from flask import Flask, render_template
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shop_nhom5.db'
-app.secret_key = "secret_key_nhom5"
-db.init_app(app)
+# Chạy server tìm file ngay tại thư mục gốc
+app = Flask(__name__, template_folder='.')
 
 @app.route('/')
-def index():
-    # US17: Báo cáo doanh thu thuần
-    total = db.session.query(db.func.sum(Invoice.total_amount)).scalar() or 0
-    return render_template('dashboard.html', total=total)
+def home():
+    # Khi mở web lên là thấy cái index.html (menu hồng) ngay
+    return render_template('index.html')
 
-@app.route('/ban-hang', methods=['GET', 'POST'])
-def sell():
-    # US1: Quét mã/Thanh toán & US10: Trừ tồn kho
-    prods = Product.query.all()
-    if request.method == 'POST':
-        p_id = request.form.get('p_id')
-        p = Product.query.get(p_id)
-        if p and p.stock > 0:
-            p.stock -= 1 # Tự động trừ kho
-            inv = Invoice(total_amount=p.price)
-            db.session.add(inv)
-            db.session.commit()
-            flash("Thanh toán thành công!")
-        return redirect('/ban-hang')
-    return render_template('sell.html', prods=prods)
+@app.route('/interface/<filename>')
+def load_interface(filename):
+    # Khi nhấn menu, cái iframe sẽ gọi link này để lấy file trong folder interface
+    return render_template(f'interface/{filename}')
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all() # Tự tạo file DB
-        if not Product.query.first(): # Tạo mẫu
-            db.session.add(Product(id="SP01", name="Váy Xòe", price=200000, stock=10))
-            db.session.commit()
     app.run(debug=True)
