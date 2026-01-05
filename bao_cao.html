@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>📊 Báo Cáo Doanh Thu</h1>
+    <div style="display: flex; gap: 20px;">
+        <div class="card" style="flex: 1; background: #fce7f3; border: 2px solid #db2777;">
+            <h3>Tổng Doanh Thu Thuần (US17)</h3>
+            <p style="font-size: 30px; font-weight: bold; color: #db2777;">{{ "{:,.0f}".format(total_revenue) }} VNĐ</p>
+        </div>
+        <div class="card" style="flex: 1; background: #e0f2fe; border: 2px solid #0284c7;">
+            <h3>Top Sản Phẩm Bán Chạy (US18)</h3>
+            <ul>
+                <li><strong>Váy Pink</strong> - 50 đơn</li>
+                <li><strong>Áo Thun Nữ</strong> - 30 đơn</li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
