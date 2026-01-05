@@ -1,0 +1,63 @@
+HỆ THỐNG DỮ LIỆU SHOP QUẦN ÁO NỮ - NHÓM 5
+[I. DANH MỤC SẢN PHẨM TRONG KHO]
+Mã SP  | Tên Sản Phẩm          | Phân loại | Size | Giá Bán  | Tồn Kho
+------------------------------------------------------------
+SP001  | Áo Sơ Mi Lụa          | Áo        | S    | 250,000  | 42
+SP002  | Áo Sơ Mi Lụa          | Áo        | M    | 250,000  | 35
+SP003  | Chân Váy Chữ A        | Váy       | S    | 320,000  | 20
+SP004  | Chân Váy Chữ A        | Váy       | M    | 320,000  | 18
+SP005  | Đầm Hoa Nhí Dáng Dài  | Đầm       | L    | 450,000  | 12
+SP006  | Quần Jean Baggy       | Quần      | M    | 380,000  | 25
+SP007  | Áo Thun Basic         | Áo        | S    | 150,000  | 100
+SP008  | Áo Khoác Blazer       | Khoác     | M    | 650,000  | 8
+SP009  | Chân Váy Midi         | Váy       | Fre  | 290,000  | 15
+SP010  | Quần Tây Công Sở      | Quần      | L    | 350,000  | 22
+
+[II. QUẢN LÝ VOUCHER & KHUYẾN MÃI]
+Mã Mã     | Mô tả                 | Điều kiện   | Lượt còn | Hạn dùng
+------------------------------------------------------------
+GIAM10    | Giảm 10% tổng đơn     | Đơn > 500k  | 45       | 31/12/2025
+VUITET    | Giảm thẳng 50,000đ    | Mọi đơn     | 12       | 05/01/2026
+VIP2025   | Giảm 20% cho VIP      | Chỉ khách VIP| 100      | 31/12/2026
+
+[III. HỒ SƠ KHÁCH HÀNG & TÍCH ĐIỂM]
+Mã KH  | Họ và Tên            | Số điện thoại | Điểm  | Hạng
+------------------------------------------------------------
+KH001  | Nguyễn Thu Thảo      | 0905123456    | 1550  | VIP
+KH002  | Lê Minh Anh          | 0988777666    | 420   | Thân thiết
+KH003  | Trần Thị Hà          | 0914000111    | 85    | Mới
+KH004  | Phạm Phương Linh     | 0935222333    | 2100  | Vàng
+KH005  | Đỗ Mỹ Huyền          | 0977444555    | 10    | Mới
+
+[IV. QUẢN LÝ NHÂN SỰ & TÀI KHOẢN]
+Mã NV  | Tên Nhân Viên        | Chức vụ       | Tài khoản    | Trạng thái
+------------------------------------------------------------
+ADMIN  | Quản Trị Viên        | Chủ shop      | admin_root   | Hoạt động
+NV001  | Trần Van Nam         | Bán hàng      | nam_sale01   | Hoạt động
+NV002  | Nguyễn Mai Chi       | Kho vận       | chi_kho2025  | Hoạt động
+NV003  | Hoàng Bảo Ngọc       | Bán hàng      | ngoc_beauty  | Khóa
+
+[V. LỊCH SỬ GIAO DỊCH & XUẤT HÓA ĐƠN]
+Ngày       | Mã Đơn | Mã KH | Sản Phẩm | SL | Tổng Tiền | HT Thanh Toán
+------------------------------------------------------------
+14/10/2025 | DH101  | KH001 | SP005    | 1  | 450,000   | Chuyển khoản
+15/11/2025 | DH102  | KH004 | SP008    | 1  | 650,000   | Thẻ Visa
+16/11/2025 | DH103  | KH002 | SP001    | 2  | 500,000   | Tiền mặt
+16/11/2025 | DH104  | KH003 | SP007    | 3  | 450,000   | Tiền mặt
+17/11/2025 | DH105  | KH001 | SP003    | 1  | 320,000   | Ví MoMo
+17/11/2025 | DH106  | KH005 | SP002    | 1  | 250,000   | Tiền mặt
+18/11/2025 | DH107  | KH004 | SP010    | 2  | 700,000   | Chuyển khoản
+19/11/2025 | DH108  | KH002 | SP006    | 1  | 380,000   | Tiền mặt
+
+[VI. NHẬT KÝ ĐỔI TRẢ HÀNG]
+Ngày       | Mã Đơn | Lý do đổi trả           | Trạng thái xử lý
+------------------------------------------------------------
+21/11/2025 | DH103  | Size M quá rộng         | Đã đổi sang Size S
+18/11/2025 | DH105  | Nhầm màu sản phẩm       | Đã hoàn tiền
+
+[VII. BÁO CÁO NHẬP KHO]
+Ngày Nhập  | Nhà Cung Cấp    | Mã SP | Số lượng | Đơn giá nhập
+------------------------------------------------------------
+15/12/2025 | Xưởng May HN    | SP007 | 200      | 80,000
+18/12/2025 | Tổng Kho SG     | SP001 | 50       | 150,000
+============================================================
