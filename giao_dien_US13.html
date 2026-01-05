@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Thanh toán & Tích điểm - US14</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; padding: 20px; }
+        .checkout-container { max-width: 500px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        h2 { color: #333; text-align: center; border-bottom: 2px solid #ee4d2d; padding-bottom: 10px; }
+        
+        .info-section { margin-bottom: 20px; padding: 15px; background: #fffcf5; border: 1px solid #ffe9ad; border-radius: 8px; }
+        .info-label { font-weight: bold; color: #856404; }
+        
+        .order-summary { margin-top: 20px; line-height: 2; }
+        .row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        
+        .points-input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        
+        .btn-pay { width: 100%; background-color: #ee4d2d; color: white; border: none; padding: 15px; font-size: 18px; font-weight: bold; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        .btn-pay:hover { background-color: #d73211; }
+        
+        .loyalty-msg { font-size: 13px; color: #666; font-style: italic; margin-top: 15px; text-align: center; }
+        .highlight { color: #ee4d2d; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="checkout-container">
+    <h2>THANH TOÁN</h2>
+    
+    <div class="info-section">
+        <div class="info-label">Khách hàng: Nguyễn Văn A</div>
+        <div>Điểm hiện có: <span class="highlight">50 điểm</span></div>
+    </div>
+
+    <div class="order-summary">
+        <div class="row">
+            <span>Tổng tiền hàng:</span>
+            <span>250.000đ</span>
+        </div>
+        
+        <div class="row" style="align-items: center;">
+            <label for="points">Sử dụng điểm (1đ = 1.000đ):</label>
+            <input type="number" id="points" class="points-input" style="width: 80px;" value="20" min="0" max="50">
+        </div>
+
+        <div class="row" style="color: #ee4d2d; font-weight: bold;">
+            <span>Giảm giá từ điểm:</span>
+            <span>- 20.000đ</span>
+        </div>
+        <hr>
+        <div class="row" style="font-size: 20px; font-weight: bold;">
+            <span>TỔNG CỘNG:</span>
+            <span class="highlight">230.000đ</span>
+        </div>
+    </div>
+
+    <button class="btn-pay">ĐẶT HÀNG</button>
+
+    <div class="loyalty-msg">
+        Thanh toán đơn hàng này để tích thêm <span class="highlight">23 điểm</span> vào tài khoản.
+        <br>(Tỉ lệ: 10.000đ = 1 điểm)
+    </div>
+</div>
+
+</body>
+</html>
