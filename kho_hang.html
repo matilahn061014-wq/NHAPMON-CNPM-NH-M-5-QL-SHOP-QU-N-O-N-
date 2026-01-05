@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>📦 Quản Lý Kho & Sản Phẩm</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Mã SP</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Tồn Kho (US10)</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in products %}
+            <tr>
+                <td>{{ p.id }}</td>
+                <td>{{ p.name }}</td>
+                <td><strong style="color: red;">{{ p.stock }}</strong></td>
+                <td><button class="btn" style="background: #3498db;">Nhập hàng (US9)</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

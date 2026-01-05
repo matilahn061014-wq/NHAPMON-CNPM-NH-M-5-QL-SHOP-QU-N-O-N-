@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>👥 Quản Lý Nhân Viên</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Tên Nhân Viên</th>
+                <th>Chức vụ</th>
+                <th>Lương cơ bản (US16)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in staff %}
+            <tr>
+                <td>{{ s.name }}</td>
+                <td>{{ s.role }}</td>
+                <td>{{ "{:,.0f}".format(s.salary) if s.salary is number else s.salary }} VNĐ</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>👩 Khách Hàng Thân Thiết</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>SĐT (Khóa chính)</th>
+                <th>Tên Khách</th>
+                <th>Điểm tích lũy (US13)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in customers %}
+            <tr>
+                <td>{{ c.phone }}</td>
+                <td>{{ c.name }}</td>
+                <td><span style="background: #f1c40f; padding: 5px 10px; border-radius: 10px;">{{ c.points }} điểm</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
