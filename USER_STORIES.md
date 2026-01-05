@@ -30,14 +30,14 @@
 ### US06: Thêm sản phẩm mới
 * **Mô tả:** Cho phép thêm sản phẩm với các thông tin: Tên, danh mục, giá, số lượng.
 * **Tiêu chí chấp nhận (AC):** Dữ liệu hợp lệ mới được lưu; Hiển thị ngay trong danh sách sau khi thêm.
-
-### US07: Sửa thông tin sản phẩm
-* **Mô tả:** Cập nhật thông tin sản phẩm để đảm bảo dữ liệu luôn chính xác.
-* **Tiêu chí chấp nhận (AC):** Hiển thị đúng thông tin cũ; Cảnh báo nếu dữ liệu sửa không hợp lệ.
-
-### US08: Xóa sản phẩm
+  
+### US07: Xóa sản phẩm
 * **Mô tả:** Loại bỏ sản phẩm không còn kinh doanh khỏi hệ thống.
 * **Tiêu chí chấp nhận (AC):** Có hộp thoại xác nhận trước khi xóa; Chỉ người có quyền mới được thực hiện.
+
+### US08: Sửa thông tin sản phẩm
+* **Mô tả:** Cập nhật thông tin sản phẩm để đảm bảo dữ liệu luôn chính xác.
+* **Tiêu chí chấp nhận (AC):** Hiển thị đúng thông tin cũ; Cảnh báo nếu dữ liệu sửa không hợp lệ.
 
 ### US09: Tạo Phiếu Nhập hàng
 * **Mô tả:** Ghi nhận lô hàng nhập từ nhà cung cấp để tăng tồn kho.
