@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Hệ Thống Quản Lý Shop Quần Áo Nữ - Nhóm 5</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root { --pink: #ff85a2; --light: #fff5f7; --dark: #444; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; display: flex; height: 100vh; overflow: hidden; background: #fdf2f5; }
+        .sidebar { width: 330px; background: white; border-right: 1px solid #eee; display: flex; flex-direction: column; box-shadow: 2px 0 10px rgba(0,0,0,0.05); }
+        .logo { padding: 25px 15px; color: var(--pink); font-size: 18px; font-weight: bold; text-align: center; border-bottom: 2px solid var(--light); line-height: 1.4; }
+        .menu { flex: 1; overflow-y: auto; padding: 10px 0; }
+        .menu-cat { padding: 15px 20px 5px; font-size: 11px; color: #aaa; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
+        .menu-item { display: flex; align-items: center; padding: 11px 20px; color: var(--dark); text-decoration: none; font-size: 13px; border-left: 4px solid transparent; transition: 0.2s; }
+        .menu-item:hover, .menu-item.active { background: var(--light); color: var(--pink); border-left-color: var(--pink); font-weight: 600; }
+        .menu-item i { margin-right: 12px; width: 22px; text-align: center; font-size: 15px; }
+        .main-content { flex: 1; display: flex; flex-direction: column; }
+        header { height: 60px; background: white; display: flex; align-items: center; padding: 0 25px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); font-weight: bold; color: var(--dark); border-bottom: 1px solid #eee; }
+        iframe { width: 100%; height: 100%; border: none; background: white; }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">👗 HỆ THỐNG QUẢN LÝ<br>SHOP QUẦN ÁO NỮ - NHÓM 5</div>
+    <div class="menu">
+        <div class="menu-cat">BÁN HÀNG & THANH TOÁN</div>
+        <a href="interface/giao_dien_US1.html" target="frame-view" class="menu-item active"><i class="fas fa-barcode"></i> Quét mã & Tìm kiếm sản phẩm</a>
+        <a href="interface/giao_dien_US2.html" target="frame-view" class="menu-item"><i class="fas fa-credit-card"></i> Thanh toán & Chọn hình thức trả</a>
+        <a href="interface/giao_dien_US3.html" target="frame-view" class="menu-item"><i class="fas fa-percentage"></i> Áp dụng mã Voucher giảm giá</a>
+        <a href="interface/giao_dien_US4.html" target="frame-view" class="menu-item"><i class="fas fa-sync-alt"></i> Tự động cập nhật trừ tồn kho</a>
+        <a href="interface/giao_dien_US5.html" target="frame-view" class="menu-item"><i class="fas fa-exchange-alt"></i> Xử lý đổi trả & Cộng lại tồn kho</a>
+
+        <div class="menu-cat">KHO HÀNG & SẢN PHẨM</div>
+<a href="interface/giao_dien_US6.html" target="frame-view" class="menu-item"><i class="fas fa-plus-circle"></i> Thêm sản phẩm mới vào hệ thống</a>
+        <a href="interface/giao_dien_US7.html" target="frame-view" class="menu-item"><i class="fas fa-edit"></i> Chỉnh sửa thông tin sản phẩm</a>
+        <a href="interface/giao_dien_US8.html" target="frame-view" class="menu-item"><i class="fas fa-trash-alt"></i> Xóa sản phẩm khỏi danh mục</a>
+        <a href="interface/giao_dien_US09.html" target="frame-view" class="menu-item"><i class="fas fa-truck-loading"></i> Tạo phiếu nhập hàng nhà cung cấp</a>
+        <a href="interface/giao_dien_US10.html" target="frame-view" class="menu-item"><i class="fas fa-boxes"></i> Kiểm soát tồn kho theo Màu/Size</a>
+
+        <div class="menu-cat">QUẢN LÝ KHÁCH HÀNG</div>
+        <a href="interface/giao_dien_US11.html" target="frame-view" class="menu-item"><i class="fas fa-user-check"></i> Hồ sơ & Thông tin khách hàng</a>
+        <a href="interface/giao_dien_US12.html" target="frame-view" class="menu-item"><i class="fas fa-history"></i> Lịch sử chi tiêu & Đơn hàng cũ</a>
+        <a href="interface/giao_dien_US13.html" target="frame-view" class="menu-item"><i class="fas fa-coins"></i> Tích lũy và sử dụng điểm thưởng</a>
+
+        <div class="menu-cat">NHÂN SỰ & HỆ THỐNG</div>
+        <a href="interface/giao_dien_US14.html" target="frame-view" class="menu-item"><i class="fas fa-user-shield"></i> Phân quyền tài khoản Admin</a>
+        <a href="interface/giao_dien_US16.html" target="frame-view" class="menu-item"><i class="fas fa-money-check-alt"></i> Quản lý lương và hoa hồng</a>
+
+        <div class="menu-cat">BÁO CÁO & THỐNG KÊ</div>
+        <a href="interface/giao_dien_US15.html" target="frame-view" class="menu-item"><i class="fas fa-user-chart"></i> Đánh giá hiệu suất nhân viên</a>
+        <a href="interface/giao_dien_US17.html" target="frame-view" class="menu-item"><i class="fas fa-file-invoice-dollar"></i> Báo cáo doanh thu thuần</a>
+        <a href="interface/giao_dien_US18.html" target="frame-view" class="menu-item"><i class="fas fa-fire"></i> Danh sách 10 sản phẩm bán chạy</a>
+    </div>
+</div>
+
+<div class="main-content">
+    <header id="cur-title">Hệ thống quản lý / Quét mã & Tìm kiếm sản phẩm</header>
+    <iframe src="interface/giao_dien_US1.html" name="frame-view"></iframe>
+</div>
+
+<script>
+    const links = document.querySelectorAll('.menu-item');
+    links.forEach(link => {
+        link.addEventListener('click', function() {
+            links.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            document.getElementById('cur-title').innerText = "Hệ thống quản lý / " + this.innerText.trim();
+        });
+    });
+</script>
+
+</body>
+</html>
